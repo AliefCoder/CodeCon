@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_print
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'home.dart';
@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +55,7 @@ class MyHomePage extends StatelessWidget {
             Container(
               width: 375,
               child: TextField(
+                controller: emailController,
                 cursorColor: Colors.white,
                 style: TextStyle(
                   color: Colors.white,
@@ -80,7 +84,9 @@ class MyHomePage extends StatelessWidget {
             Container(
               width: 375,
               child: TextField(
+                controller: passwordController,
                 cursorColor: Colors.white,
+                obscureText: true,
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -107,11 +113,30 @@ class MyHomePage extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                print('Login Button Pressed');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                // Check if email or password is empty
+                if (emailController.text.isEmpty ||
+                    passwordController.text.isEmpty) {
+                  // Show a dialog or snackbar if fields are empty
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Error'),
+                      content: Text('Please fill in all fields'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  print('Login Button Pressed');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[600],
