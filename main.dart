@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -121,7 +122,7 @@ class MyHomePage extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: Text('Error'),
-                      content: Text('Please fill in all fields'),
+                      content: Text('Please fill in all the fucking fields'),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -192,6 +193,30 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print('Register button pressed');
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+              },
+              child: Center(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  'New here?\nResgister Now!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto',
+                  ),
+                  ),
               ),
             ),
           ],
